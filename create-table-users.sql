@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS profiles;
+DROP TABLE IF EXISTS users;
 
-CREATE TABLE profiles (
+CREATE TABLE users (
   id            serial,
   first_name    text,
   last_name     text,

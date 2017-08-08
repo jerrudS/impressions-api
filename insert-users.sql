@@ -1,6 +1,6 @@
-TRUNCATE TABLE profiles;
+TRUNCATE TABLE users;
 
-INSERT INTO profiles (first_name, last_name, user_name, rating)
+INSERT INTO users (first_name, last_name, user_name, rating)
 VALUES
   ('Joe', 'Jackson', 'J_Jack13', 4.01),
   ('Miranda', 'Talbert', 'Tal234', 4.55),
