@@ -1,0 +1,45 @@
+{
+  "name": "Impressionsnpm ",
+  "version": "1.0.0",
+  "description": "RESTful API for Impressions App",
+  "main": "index.js",
+  "scripts": {
+    "bundle": "browserify -t babelify client/index.js -o server/public/bundle.js",
+    "watch:client": "watchify -vd -t babelify client/index.js -o server/public/bundle.js",
+    "watch:server": "nodemon server/index.js --ignore server/public/**",
+    "watch": "run-p watch:client watch:server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Jerrud Sabourin",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.0.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "htmlhint": "^0.9.13",
+    "husky": "^0.13.4",
+    "nodemon": "^1.11.0",
+    "npm-run-all": "^4.0.2",
+    "stylelint": "^7.10.1",
+    "stylelint-config-standard": "^16.0.0",
+    "watchify": "^3.9.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "knex": "^0.13.0",
+    "pg": "^7.0.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "request": "^2.81.0"
+  }
+}
