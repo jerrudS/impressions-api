@@ -8,6 +8,20 @@ function selectUsers() {
     .select('*').from('users')
 }
 
+function selectReviews() {
+  return knex
+    .select('*').from('reviews')
+}
+
+function insertReview(rating, review) {
+  return knex
+    .insert(rating, review)
+    .into('reviews')
+    .returning('*')
+}
+
 module.exports = {
-  selectUsers: selectUsers
+  selectUsers: selectUsers,
+  selectReviews: selectReviews,
+  insertReview: insertReview
 }
