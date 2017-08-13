@@ -13,16 +13,19 @@ app.get('/users', (req, res) => {
 })
 
 app.get('/reviews', (req, res) => {
-  selectReviews()
+  console.log(req.query.id)
+  const userId = req.query.id
+  selectReviews(userId)
     .then(data => {
       (res.send(data))
     })
 })
 
 app.post('/reviews', (req, res) => {
-  const { rating, review } = req.body
+  const review = req.body
+  console.log(review)
 
-  insertReview(rating, review)
+  insertReview(review)
     .then(data => {
       res.status(201).json(data)
     })

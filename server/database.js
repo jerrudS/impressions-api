@@ -8,14 +8,14 @@ function selectUsers() {
     .select('*').from('users')
 }
 
-function selectReviews() {
+function selectReviews(columnValue) {
   return knex
-    .select('*').from('reviews')
+    .select('*').from('reviews').where('user_id', columnValue)
 }
 
-function insertReview(rating, review) {
+function insertReview(review) {
   return knex
-    .insert(rating, review)
+    .insert(review)
     .into('reviews')
     .returning('*')
 }
