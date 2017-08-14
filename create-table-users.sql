@@ -5,6 +5,5 @@ CREATE TABLE users (
   first_name    text,
   last_name     text,
   user_name     varchar,
-  rating        decimal,
-  review        varchar
+  email         varchar
 );
