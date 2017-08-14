@@ -25,7 +25,6 @@ app.get('/reviews', (req, res) => {
 
 app.post('/reviews', (req, res) => {
   const review = req.body
-  console.log(review)
 
   insertReview(review)
     .then(data => {
