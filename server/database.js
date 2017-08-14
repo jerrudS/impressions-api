@@ -13,6 +13,10 @@ function selectReviews(columnValue) {
     .select('*').from('reviews').where('user_id', columnValue)
 }
 
+function selectReviewRating(columnValue) {
+  return knex('reviews').avg('rating').where('user_id', columnValue)
+}
+
 function insertReview(review) {
   return knex
     .insert(review)
@@ -23,5 +27,6 @@ function insertReview(review) {
 module.exports = {
   selectUsers: selectUsers,
   selectReviews: selectReviews,
-  insertReview: insertReview
+  insertReview: insertReview,
+  selectReviewRating: selectReviewRating
 }

@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const { selectUsers, selectReviews, insertReview } = require('./database')
+const { selectReviewRating, selectUsers, selectReviews, insertReview } = require('./database')
 
 app.use(bodyParser.json())
 
@@ -13,12 +13,14 @@ app.get('/users', (req, res) => {
 })
 
 app.get('/reviews', (req, res) => {
-  console.log(req.query.id)
   const userId = req.query.id
-  selectReviews(userId)
-    .then(data => {
-      (res.send(data))
-    })
+  Promise.all([
+    selectReviewRating(userId),
+    selectReviews(userId)
+  ])
+  .then(data => {
+    (res.send(data))
+  })
 })
 
 app.post('/reviews', (req, res) => {
