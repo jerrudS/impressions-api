@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
-  id            serial,
-  first_name    text,
-  last_name     text,
-  user_name     varchar,
-  password      varchar,
-  email         varchar
+  id                  serial,
+  firstname           text,
+  lastname            text,
+  username            varchar,
+  hashedPassword      varchar,
+  email               varchar
 );

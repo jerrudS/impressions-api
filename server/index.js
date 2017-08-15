@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const { selectReviewRating, selectUsers, selectReviews, insertReview, insertUser } = require('./database')
+const bcrypt = require('bcrypt')
 
 app.use(bodyParser.json())
 
@@ -13,9 +14,10 @@ app.get('/users', (req, res) => {
 })
 
 app.post('/users', (req, res) => {
-  const userData = req.body
+  const { firstname, lastname, username, password, email } = req.body
+  const hashedpassword = bcrypt.hashSync(password, 10)
 
-  insertUser(userData)
+  insertUser(firstname, lastname, username, hashedpassword, email)
     .then(data => {
       res.status(201).json(data)
     })

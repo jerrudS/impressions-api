@@ -8,20 +8,20 @@ function selectUsers(user) {
     .select('*').from('users')
 }
 
-function insertUser(user) {
+function insertUser(firstname, lastname, username, hashedpassword, email) {
   return knex
-    .insert(user)
+    .insert({ firstname, lastname, username, hashedpassword, email })
     .into('users')
     .returning('*')
 }
 
 function selectReviews(columnValue) {
   return knex
-    .select('*').from('reviews').where('user_id', columnValue)
+    .select('*').from('reviews').where('userId', columnValue)
 }
 
 function selectReviewRating(columnValue) {
-  return knex('reviews').avg('rating').where('user_id', columnValue)
+  return knex('reviews').avg('rating').where('userId', columnValue)
 }
 
 function insertReview(review) {
