@@ -6,10 +6,8 @@
     "npm": "4.6.1"
   },
   "description": "RESTful API for Impressions App",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
-    "bundle": "browserify -t babelify client/index.js -o server/public/bundle.js",
-    "watch:client": "watchify -vd -t babelify client/index.js -o server/public/bundle.js",
     "watch:server": "nodemon server/index.js --ignore server/public/**",
     "watch": "run-p watch:client watch:server",
     "db:make": "pg-bump create create-table-users create-table-reviews",
@@ -17,7 +15,6 @@
     "db:down": "pg-bump down",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node .",
-    "postinstall": "npm run bundle",
     "heroku-postbuild": "pg-bump up"
   },
   "keywords": [],
