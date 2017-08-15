@@ -1,8 +1,8 @@
 TRUNCATE TABLE users;
 
-INSERT INTO users (first_name, last_name, user_name, email)
+INSERT INTO users (first_name, last_name, user_name, password, email)
 VALUES
-  ('Joe', 'Jackson', 'J_Jack13', 'JJack55@san.rr.com'),
-  ('Miranda', 'Talbert', 'Tal234', 'Talbert223@gmail.com'),
-  ('Sam', 'Strong', 'MrStrong44', 'Sammy@apple.com'),
-  ('Ace', 'Lundquist', 'Ace29', 'ace@yahoo.com');
+  ('Joe', 'Jackson', 'J_Jack13', 'Jack1212', 'JJack55@san.rr.com'),
+  ('Miranda', 'Talbert', 'Tal234', 'Miranda23', 'Talbert223@gmail.com'),
+  ('Sam', 'Strong', 'MrStrong44', 'strongone33', 'Sammy@apple.com'),
+  ('Ace', 'Lundquist', 'Ace29', 'aceofthebase99', 'ace@yahoo.com');

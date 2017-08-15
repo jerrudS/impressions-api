@@ -3,9 +3,16 @@ const knex = require('knex')({
   connection: process.env.DATABASE_URL
 })
 
-function selectUsers() {
+function selectUsers(user) {
   return knex
     .select('*').from('users')
+}
+
+function insertUser(user) {
+  return knex
+    .insert(user)
+    .into('users')
+    .returning('*')
 }
 
 function selectReviews(columnValue) {
@@ -28,5 +35,6 @@ module.exports = {
   selectUsers: selectUsers,
   selectReviews: selectReviews,
   insertReview: insertReview,
-  selectReviewRating: selectReviewRating
+  selectReviewRating: selectReviewRating,
+  insertUser: insertUser
 }
