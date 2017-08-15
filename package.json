@@ -1,6 +1,10 @@
 {
   "name": "Impressionsnpm ",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.2.1",
+    "npm": "4.6.1"
+  },
   "description": "RESTful API for Impressions App",
   "main": "index.js",
   "scripts": {
@@ -8,7 +12,13 @@
     "watch:client": "watchify -vd -t babelify client/index.js -o server/public/bundle.js",
     "watch:server": "nodemon server/index.js --ignore server/public/**",
     "watch": "run-p watch:client watch:server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "db:make": "pg-bump create create-table-users create-table-reviews",
+    "db:up": "pg-bump up",
+    "db:down": "pg-bump down",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "postinstall": "npm run bundle",
+    "heroku-postbuild": "pg-bump up"
   },
   "keywords": [],
   "author": "Jerrud Sabourin",
@@ -18,6 +28,7 @@
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babelify": "^7.3.0",
     "browserify": "^14.4.0",
+    "dotenv": "^4.0.0",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.3.0",
@@ -29,12 +40,14 @@
     "husky": "^0.13.4",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.2",
+    "pg-bump": "^1.0.3",
     "stylelint": "^7.10.1",
     "stylelint-config-standard": "^16.0.0",
     "watchify": "^3.9.0"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
+    "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "knex": "^0.13.0",
     "pg": "^7.0.2",
