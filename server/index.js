@@ -1,7 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const { selectReviewRating, selectUsers, selectReviews, insertReview } = require('./database')
+const { selectReviewRating, selectUsers, selectReviews, insertReview, insertUser } = require('./database')
+const bcrypt = require('bcrypt')
 
 app.use(bodyParser.json())
 
@@ -9,6 +10,16 @@ app.get('/users', (req, res) => {
   selectUsers()
     .then(data => {
       (res.send(data))
+    })
+})
+
+app.post('/users', (req, res) => {
+  const { firstname, lastname, username, password, email } = req.body
+  const hashedpassword = bcrypt.hashSync(password, 10)
+
+  insertUser(firstname, lastname, username, hashedpassword, email)
+    .then(data => {
+      res.status(201).json(data)
     })
 })
 
@@ -32,6 +43,6 @@ app.post('/reviews', (req, res) => {
     })
 })
 
-app.listen(3007, () => {
-  console.log('Listening on port 3007')
+app.listen(process.env.PORT, () => {
+  console.log('Listening on port', process.env.PORT)
 })

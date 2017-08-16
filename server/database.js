@@ -1,20 +1,27 @@
 const knex = require('knex')({
   dialect: 'pg',
-  connection: 'postgres://localhost:5432/impressions'
+  connection: process.env.DATABASE_URL
 })
 
-function selectUsers() {
+function selectUsers(user) {
   return knex
     .select('*').from('users')
 }
 
+function insertUser(firstname, lastname, username, hashedpassword, email) {
+  return knex
+    .insert({ firstname, lastname, username, hashedpassword, email })
+    .into('users')
+    .returning('*')
+}
+
 function selectReviews(columnValue) {
   return knex
-    .select('*').from('reviews').where('user_id', columnValue)
+    .select('*').from('reviews').where('userId', columnValue)
 }
 
 function selectReviewRating(columnValue) {
-  return knex('reviews').avg('rating').where('user_id', columnValue)
+  return knex('reviews').avg('rating').where('userId', columnValue)
 }
 
 function insertReview(review) {
@@ -28,5 +35,6 @@ module.exports = {
   selectUsers: selectUsers,
   selectReviews: selectReviews,
   insertReview: insertReview,
-  selectReviewRating: selectReviewRating
+  selectReviewRating: selectReviewRating,
+  insertUser: insertUser
 }
