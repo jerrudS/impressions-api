@@ -15,6 +15,11 @@ function insertUser(firstname, lastname, username, hashedpassword, email) {
     .returning('*')
 }
 
+function findUser(username) {
+  return knex('users')
+    .where('username', username)
+}
+
 function selectReviews(columnValue) {
   return knex
     .select('*').from('reviews').where('userId', columnValue)
@@ -36,5 +41,6 @@ module.exports = {
   selectReviews: selectReviews,
   insertReview: insertReview,
   selectReviewRating: selectReviewRating,
-  insertUser: insertUser
+  insertUser: insertUser,
+  findUser: findUser
 }
