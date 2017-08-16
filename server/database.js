@@ -22,11 +22,11 @@ function findUser(username) {
 
 function selectReviews(columnValue) {
   return knex
-    .select('*').from('reviews').where('userId', columnValue)
+    .select('*').from('reviews').where('userid', columnValue)
 }
 
 function selectReviewRating(columnValue) {
-  return knex('reviews').avg('rating').where('userId', columnValue)
+  return knex('reviews').avg('rating').where('userid', columnValue)
 }
 
 function insertReview(review) {

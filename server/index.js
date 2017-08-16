@@ -1,3 +1,4 @@
+require('dotenv/config')
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
@@ -7,42 +8,12 @@ const expressJWT = require('express-jwt')
 const jwt = require('jsonwebtoken')
 
 app.use(bodyParser.json())
-app.use(expressJWT({
-  secret: process.env.JWT_SECRET
-}).unless({ path: '/login' }))
-
-app.get('/users', (req, res) => {
-  selectUsers()
-    .then(data => {
-      (res.send(data))
-    })
-})
 
 app.post('/users', (req, res) => {
   const { firstname, lastname, username, password, email } = req.body
   const hashedpassword = bcrypt.hashSync(password, 10)
 
   insertUser(firstname, lastname, username, hashedpassword, email)
-    .then(data => {
-      res.status(201).json(data)
-    })
-})
-
-app.get('/reviews', (req, res) => {
-  const userId = req.query.id
-  Promise.all([
-    selectReviewRating(userId),
-    selectReviews(userId)
-  ])
-  .then(data => {
-    (res.send(data))
-  })
-})
-
-app.post('/reviews', (req, res) => {
-  const review = req.body
-
-  insertReview(review)
     .then(data => {
       res.status(201).json(data)
     })
@@ -69,6 +40,37 @@ app.post('/login', (req, res) => {
         res.status(200).send({ myToken })
       })
   }
+})
+
+app.use(expressJWT({
+  secret: process.env.JWT_SECRET
+}))
+
+app.get('/users', (req, res) => {
+  selectUsers()
+    .then(data => {
+      (res.send(data))
+    })
+})
+
+app.get('/reviews', (req, res) => {
+  const userId = req.query.id
+  Promise.all([
+    selectReviewRating(userId),
+    selectReviews(userId)
+  ])
+  .then(data => {
+    (res.send(data))
+  })
+})
+
+app.post('/reviews', (req, res) => {
+  const review = req.body
+
+  insertReview(review)
+    .then(data => {
+      res.status(201).json(data)
+    })
 })
 
 app.listen(process.env.PORT, () => {
