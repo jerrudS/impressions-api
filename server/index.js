@@ -3,8 +3,13 @@ const bodyParser = require('body-parser')
 const app = express()
 const { selectReviewRating, selectUsers, selectReviews, insertReview, insertUser, findUser } = require('./database')
 const bcrypt = require('bcrypt')
+const expressJWT = require('express-jwt')
+const jwt = require('jsonwebtoken')
 
 app.use(bodyParser.json())
+app.use(expressJWT({
+  secret: process.env.JWT_SECRET
+}).unless({ path: '/login' }))
 
 app.get('/users', (req, res) => {
   selectUsers()
@@ -58,10 +63,10 @@ app.post('/login', (req, res) => {
           return res.status(404).send('username does not exist')
         }
         if (!bcrypt.compareSync(password, user[0].hashedpassword)) {
-          console.log('no match')
           return res.status(401).send('passwords did not match')
         }
-        res.status(200).send('success')
+        const myToken = jwt.sign({ username }, process.env.JWT_SECRET)
+        res.status(200).send({ myToken })
       })
   }
 })
