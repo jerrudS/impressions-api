@@ -60,10 +60,10 @@ app.get('/users', (req, res) => {
 })
 
 app.get('/reviews', (req, res) => {
-  const userId = req.query.id
+  const userid = req.query.id
   Promise.all([
-    selectReviewRating(userId),
-    selectReviews(userId)
+    selectReviewRating(userid),
+    selectReviews(userid)
   ])
   .then(data => {
     (res.send(data))
