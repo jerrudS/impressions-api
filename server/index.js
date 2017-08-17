@@ -22,19 +22,19 @@ app.post('/users', (req, res) => {
 app.post('/login', (req, res) => {
   const { username, password } = req.body
   if (!username) {
-    return res.status(400).send('username required')
+    return res.status(400)
   }
   else if (!password) {
-    return res.status(400).send('password required')
+    return res.status(400)
   }
   else {
     findUser(username)
       .then(user => {
         if (!user.length) {
-          return res.status(404).send('username does not exist')
+          return res.status(404)
         }
         if (!bcrypt.compareSync(password, user[0].hashedpassword)) {
-          return res.status(401).send('passwords did not match')
+          return res.status(401)
         }
         const myToken = jwt.sign({ username }, process.env.JWT_SECRET)
         res.status(200).send({ myToken })
@@ -45,6 +45,12 @@ app.post('/login', (req, res) => {
 app.use(expressJWT({
   secret: process.env.JWT_SECRET
 }))
+
+app.use((err, req, res, next) => {
+  if (err) {
+    console.log(err)
+  }
+})
 
 app.get('/users', (req, res) => {
   selectUsers()
