@@ -5,14 +5,14 @@ const knex = require('knex')({
 
 function selectUsers(user) {
   return knex
-    .select('*').from('users')
+    .select('firstname', 'lastname', 'id').from('users')
 }
 
 function insertUser(firstname, lastname, username, hashedpassword, email) {
   return knex
     .insert({ firstname, lastname, username, hashedpassword, email })
     .into('users')
-    .returning('*')
+    .returning('firstname', 'lastname', 'username')
 }
 
 function findUser(username) {
