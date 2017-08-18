@@ -10,7 +10,7 @@
   "scripts": {
     "watch:server": "nodemon server/index.js --ignore server/public/**",
     "watch": "run-p watch:client watch:server",
-    "db:make": "pg-bump create create-table-users create-table-reviews",
+    "db:make": "pg-bump create",
     "db:up": "pg-bump up",
     "db:down": "pg-bump down",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -46,6 +46,8 @@
     "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
+    "express-jwt": "^5.3.0",
+    "jsonwebtoken": "^7.4.2",
     "knex": "^0.13.0",
     "pg": "^7.0.2",
     "react": "^15.6.1",
